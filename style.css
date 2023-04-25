@@ -1,0 +1,26 @@
+.container{
+    margin: auto;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.title{
+    text-align: center;
+    font-size: 50px;
+    color: #180f3b;
+}
+.textarea{
+    width: 90%;
+}
+.keyboard-block{
+    width: 90%;
+    border: 2px solid #000;
+}
+
+.key{
+    float: left;
+    width: 45px;
+    height: 45px;
+}
