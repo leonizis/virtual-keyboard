@@ -1,6 +1,6 @@
 .container{
     margin: auto;
-    width: 90%;
+    width: 800px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,19 +19,23 @@
     width: 90%;
     border: 4px solid #000;
     background-color: #868585;
+    
+}
+.keyboard-row{
+    display: flex;
 }
 
 .key{
     text-align: center;
-    float: left;
     width: 40px;
     height: 40px;
     background-color: #535353;
     color: #fff;
     margin: 4px;
+    line-height: 35px;
 }
+
 .Backspace{
-    float: left;
     width: 90px;
     height: 40px;
     background-color: #060505;
@@ -39,21 +43,75 @@
     margin: 5px;
 }
 .Tab{
-    float: left;
-    width: 60px;
+    width: 65px;
     height: 40px;
     background-color: #060505;
     color: #fff;
     margin: 5px;
 }
 .Enter{
-    width: 70px;
+    width: 65px;
+    height: 90px;
+    background-color: #060505;
+    border: none;
+    color: #fff;
+    border-radius: 0 0 0 100%;
+}
+
+.keyboard-row:nth-child(3){
+    margin: -48px 0 0 0;
+}
+
+.CapsLock{
+    width: 78px;
     height: 40px;
     background-color: #060505;
     border: none;
     color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-
 }
+.ShiftLeft{
+    width: 78px;
+    height: 40px;
+    background-color: #060505;
+    border: none;
+    color: #fff;
+}
+.ShiftRight{
+    width: 100px;
+    height: 40px;
+    background-color: #060505;
+    border: none;
+    color: #fff;
+}
+.ControlLeft,
+.AltLeft,
+.AltRight{
+    background-color: #060505;
+}
+.MetaLeft,
+.MetaRight{
+    background-color: #060505;
+    width: 60px;
+}
+.Space{
+    width: 297px;
+}
+.ArrowLeft,
+.ArrowRight{
+    height: 18px;
+    margin: 26px 0 0 4px;
+    line-height: 20px;
+    
+}
+.ArrowUp{
+    height: 18px;
+    line-height: 15px;
+}
+.ArrowDown{
+    height: 18px;
+    margin: 26px 0 0 -44px;
+    line-height: 23px;
+}
+
+
+

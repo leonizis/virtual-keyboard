@@ -1,11 +1,40 @@
 //добавляем массив с кодами клавиатуры
-let codeDown = ["IntlBackslash", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal", "Backspace",
-                "Tab",'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', "Enter",
-                "CapsLock", 'KeyA', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote',
+const codeDown = ["IntlBackslash", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal", "Backspace",
+"Tab",'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', "Enter",
+,'CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote',"Backslash",
+,"ShiftLeft", 'Backquote', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', "ShiftRight",
+,"ControlLeft", "AltLeft", "MetaLeft", "Space", "MetaRight", "AltRight", "ArrowLeft", "ArrowUp", "ArrowDown", "ArrowRight"
 ];
-let keyDown = ["§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
-               "Tab", 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', "Enter",
-            ,'b','a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '\\'];
+const keyDownEng = ["§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
+"Tab", 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', "Enter",
+,'CapsLock','a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '\\',
+,"Shift", '`', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', "Shift",
+,"Ctrl", "Alt", "Cmd", "", "Cmd", "Alt", "◄", "▲", "▼", "►"];
+const keyUpEng = ["±", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "Backspace",
+"Tab", 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', "Enter",
+,'CapsLock','A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', "\"", '|',
+,"Shift", '~', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', "Shift",
+,"Ctrl", "Alt", "Cmd", "", "Cmd", "Alt", "◄", "▲", "▼", "►"];
+const keyCapsEng = ["§", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
+"Tab", 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', "Enter",
+,'CapsLock','A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", '\\',
+,"Shift", '`', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', "Shift",
+,"Ctrl", "Alt", "Cmd", "", "Cmd", "Alt", "◄", "▲", "▼", "►"];
+const keyDownRu = [">", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
+"Tab", 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', "Enter",
+,'CapsLock','ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', "э", 'ё',
+,"Shift", ']', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '/', "Shift",
+,"Ctrl", "Alt", "Cmd", "", "Cmd", "Alt", "◄", "▲", "▼", "►"];
+const keyUpRu = ["<", "!", "\"", "№", "%", ":", ",", ".", ";", "(", ")", "_", "+", "Backspace",
+"Tab", 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', "Enter",
+,'CapsLock','Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', "Э", 'Ё',
+,"Shift", '[', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', '?', "Shift",
+,"Ctrl", "Alt", "Cmd", "", "Cmd", "Alt", "◄", "▲", "▼", "►"];
+const keyCapsRu = [">", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
+"Tab", 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', "Enter",
+,'CapsLock','Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', "Э", 'Ё',
+,"Shift", ']', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', '/', "Shift",
+,"Ctrl", "Alt", "Cmd", "", "Cmd", "Alt", "◄", "▲", "▼", "►"];
 
 let container = document.createElement("div");
 container.setAttribute("class", "container");
@@ -30,10 +59,11 @@ keyboardBlock.classList.add("keyboard-block", "keyboard");
 container.appendChild(keyboardBlock);
 // добавляем разметку по рядам
 let keyboardKeys = [];
-let rowSizes = [14, 14, 14, 13, 10]; // колличество кнопок в каждом ряду
+let keyboardRow = "";
+let rowSizes = [14, 14, 13, 13, 10]; // колличество кнопок в каждом ряду
 
 for (let i = 0; i < 5; i++) {
-    let keyboardRow = document.createElement("div");
+    keyboardRow = document.createElement("div");
     keyboardRow.classList.add("keyboard-row");
     keyboardBlock.appendChild(keyboardRow);
 
@@ -43,7 +73,7 @@ for (let i = 0; i < 5; i++) {
         let key = document.createElement("div");
         key.classList.add("key", codeDown[j + i * 14 + (i > 1 ? 1 : 0)]); // ищем индексы для строк 3-4-5
         keyboardRow.appendChild(key);
-        key.innerHTML = keyDown[j + i * 14 + (i > 1 ? 1 : 0)];
+        key.innerHTML = keyDownEng[j + i * 14 + (i > 1 ? 1 : 0)];
         rowKeys.push(key);
     }
 
