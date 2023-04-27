@@ -15,12 +15,45 @@
     width: 90%;
 }
 .keyboard-block{
+    margin: 20px 0 0 0;
     width: 90%;
-    border: 2px solid #000;
+    border: 4px solid #000;
+    background-color: #868585;
 }
 
 .key{
+    text-align: center;
     float: left;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
+    background-color: #535353;
+    color: #fff;
+    margin: 4px;
+}
+.Backspace{
+    float: left;
+    width: 90px;
+    height: 40px;
+    background-color: #060505;
+    color: #fff;
+    margin: 5px;
+}
+.Tab{
+    float: left;
+    width: 60px;
+    height: 40px;
+    background-color: #060505;
+    color: #fff;
+    margin: 5px;
+}
+.Enter{
+    width: 70px;
+    height: 40px;
+    background-color: #060505;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+
 }
