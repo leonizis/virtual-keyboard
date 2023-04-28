@@ -81,6 +81,47 @@ for (let i = 0; i < 5; i++) {
 }
 
 
+// устанавливаем фокус на окно ввода а так же подсвечиваем нажатие клавиш через hovered 
+document.addEventListener("keydown", function(event) {
+    textarea.focus();
+    let key = document.querySelector(`.${event.code}`);
+    console.log(key);
+    key.classList.add("hovered");
+    console.log(textarea.value)
+  });
+
+// удаляем класс hovered при снятии кнопки
+  document.addEventListener("keyup", function(event) {
+    // let code = event.code;
+    // console.log(code);
+    let key = document.querySelector(`.${event.code}`);
+    console.log(key);
+    key.classList.remove("hovered");
+  });
+
+  // добавляем событие при клике мышкой
+  document.addEventListener("click", function(event) {
+    if (event.target.classList.contains("key")){
+    console.log("Клик мышью", event.target);
+    textarea.focus();
+    let code = event.target.innerHTML;
+    
+    console.log(code);
+    let key = document.querySelector(`.${event.code}`);
+    console.log(key);
+    if (code == "Backspace"){
+            textarea.value = textarea.value.slice(0, -1);
+        }else if (code == "Enter"){
+            textarea.value += "\n";
+        }else{
+            textarea.value += code;
+        }
+    
+    console.log(textarea.value)
+    }
+  });
+
+
 
 
 
@@ -92,10 +133,10 @@ for (let i = 0; i < 5; i++) {
 
 
 //
-document.onkeypress = function(event){
-    console.log(event);
-    keyDown.push(event.key);
-    codeDown.push(event.code);
-    console.log(keyDown);
-    console.log(codeDown);
-}
+// document.onkeypress = function(event){
+//     console.log(event);
+//     keyDown.push(event.key);
+//     codeDown.push(event.code);
+//     console.log(keyDown);
+//     console.log(codeDown);
+// }
