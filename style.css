@@ -40,12 +40,26 @@
     box-shadow: 0px 0px 3px 3px rgba(206, 206, 206, 0.5);
 }
 .key:active{
+    
 
     box-shadow: 0px 0px 5px 5px rgba(206, 206, 206, 0.5);
 }
+.active {
+    background-color: #e51010; /* любой цвет, который будет указывать на активную кнопку */
+  }
+  .CapsLock:active {
+    background-color: red;
+}
 .hovered{
     background-color: #312f2f;
+    box-shadow: 0px 0px 5px 5px rgba(206, 206, 206, 0.5);
 }
+.CapsLock.hovered{
+    background-color: #e51010;
+}
+.key.active {
+    background-color: #e51010;
+  }
 
 .Backspace{
     width: 90px;
