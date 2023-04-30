@@ -18,7 +18,7 @@ const keyUpEng = ['±', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '
   'Shift', '~', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 'Shift', '',
   'Ctrl', 'Alt', 'Cmd', '', 'Cmd', 'Alt', '◄', '▲', '▼', '►'];
 const keyCapsEng = ['§', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
-  'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', 'Enter',
+  'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', 'Enter', '',
   'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", '\\', '',
   'Shift', '`', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift', '',
   'Ctrl', 'Alt', 'Cmd', '', 'Cmd', 'Alt', '◄', '▲', '▼', '►'];
@@ -43,7 +43,12 @@ container.setAttribute('class', 'container');
 document.body.appendChild(container);
 
 let capsLock = 'false';
-
+let shift = 'false';
+// получаем язык из localStorage если не находим, то  присваеваем русский
+let language = localStorage.getItem('language');
+if (!language) {
+  language = 'ru';
+}
 const title = document.createElement('p');
 title.setAttribute('class', 'title');
 title.innerHTML = 'Виртуальная клавиатура';
@@ -67,6 +72,7 @@ let keyboardRow = '';
 const rowSizes = [14, 14, 13, 13, 10]; // колличество кнопок в каждом ряду
 
 function displayLetters(codes, keyses) {
+  localStorage.setItem('language', language); // сохраняем переременную language в localStorage
   for (let i = 0; i < 5; i += 1) {
     keyboardRow = document.createElement('div');
     keyboardRow.classList.add('keyboard-row');
@@ -82,21 +88,22 @@ function displayLetters(codes, keyses) {
     }
     keyboardKeys.push(rowKeys);
   }
-  console.log('обновилась клава');
   document.addEventListener('keydown', (event) => {
     const key = document.querySelector(`.${event.code}`);
     key.classList.add('hovered');
   });
-
-  document.addEventListener('click', (event) => {
-    const code = event.target.innerHTML;
-    if (code === 'CapsLock') {
-      console.log(`${event.target.innerHTML}[EQ`);
-      event.target.classList.add('active');
-    }
-  });
+  if (capsLock === 'true') {
+    const capsStyle = document.querySelector('.CapsLock');
+    capsStyle.style.backgroundColor = 'red';
+  }
+  if (shift === 'true') {
+    const shiftLeft = document.querySelector('.ShiftLeft');
+    const shiftRight = document.querySelector('.ShiftRight');
+    shiftLeft.style.backgroundColor = 'red';
+    shiftRight.style.backgroundColor = 'red';
+  }
 }
-displayLetters(codeDown, keyDownEng);
+displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
 
 // устанавливаем фокус на окно ввода а так же подсвечиваем нажатие клавиш через hovered
 document.addEventListener('keydown', (event) => {
@@ -107,20 +114,29 @@ document.addEventListener('keydown', (event) => {
 
   const key = document.querySelector(`.${event.code}`);
   key.classList.add('hovered');
-  console.log(event.ctrlKey);
-
-  console.log(event.code);
-
   if (code === 'Backspace') {
-    textarea.value = textarea.value.slice(0, -1);
+    const cursorPosition = textarea.selectionStart;
+    const textBeforeCursor = textarea.value.substring(0, cursorPosition - 1);
+    const textAfterCursor = textarea.value.substring(cursorPosition);
+    // удаляем текст до курсора
+    textarea.value = textBeforeCursor + textAfterCursor;
+    // устанавливаем позицию курсора после удаления текста
+    textarea.selectionStart = cursorPosition - 1;
+    textarea.selectionEnd = cursorPosition - 1;
   } else if (code === 'Enter') {
-    textarea.value += '\n';
-  } else if (event.ctrlKey && event.code === 'AltLeft') {
-    console.log('выполнено');
+    const cursorPosition = textarea.selectionStart;
+    const textBeforeCursor = textarea.value.substring(0, cursorPosition);
+    const textAfterCursor = textarea.value.substring(cursorPosition);
+    // удаляем текст до курсора
+    textarea.value = `${textBeforeCursor}\n${textAfterCursor}`;
+    // устанавливаем позицию курсора после удаления текста
+    textarea.selectionStart = cursorPosition + 1;
+    textarea.selectionEnd = cursorPosition + 1;
+  } else if (event.ctrlKey && event.code === 'AltLeft') { // переключение языков
+    language = language === 'ru' ? 'en' : 'ru';
     textarea.value += '';
     keyboardBlock.innerHTML = '';
-
-    displayLetters(codeDown, keyDownRu);
+    displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
   } else if (code === 'ArrowLeft') {
     textarea.value += '◄';
   } else if (code === 'ArrowUp') {
@@ -132,19 +148,25 @@ document.addEventListener('keydown', (event) => {
   } else if (key.textContent === 'Shift') {
     textarea.value += '';
     keyboardBlock.innerHTML = '';
-    displayLetters(codeDown, keyUpEng);
+    displayLetters(codeDown, (language === 'ru') ? keyUpRu : keyUpEng);
   } else if (key.textContent === 'Tab') {
     textarea.value += '    ';
   } else if (key.textContent === 'CapsLock') {
-    console.log(key);
     textarea.value += '';
     keyboardBlock.innerHTML = '';
-    displayLetters(codeDown, keyCapsEng);
+    displayLetters(codeDown, (language === 'ru') ? keyCapsRu : keyCapsEng);
     key.classList.add('hovered');
   } else if (key.textContent === 'Ctrl' || key.textContent === 'Cmd' || key.textContent === 'Alt') {
     textarea.value += '';
   } else {
-    textarea.value += event.key;
+    const cursorPosition = textarea.selectionStart;
+    const textBeforeCursor = textarea.value.substring(0, cursorPosition);
+    const textAfterCursor = textarea.value.substring(cursorPosition);
+    // удаляем текст до курсора
+    textarea.value = `${textBeforeCursor}${event.key}${textAfterCursor}`;
+    // устанавливаем позицию курсора после удаления текста
+    textarea.selectionStart = cursorPosition + 1;
+    textarea.selectionEnd = cursorPosition + 1;
   }
 });
 
@@ -154,12 +176,11 @@ document.addEventListener('keyup', (event) => {
   if (key.textContent === 'Shift') {
     key.classList.remove('hovered');
     keyboardBlock.innerHTML = '';
-    displayLetters(codeDown, keyDownEng);
+    displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
   }
   if (key.textContent === 'CapsLock') {
-    console.log(key);
     keyboardBlock.innerHTML = '';
-    displayLetters(codeDown, keyDownEng);
+    displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
     key.classList.remove('hovered');
   }
   key.classList.remove('hovered');
@@ -170,36 +191,65 @@ document.addEventListener('click', (event) => {
   if (event.target.classList.contains('key')) {
     textarea.focus();
     const code = event.target.innerHTML;
-    console.log(code);
 
     if (code === 'Backspace') {
-      textarea.value = textarea.value.slice(0, -1);
+      const cursorPosition = textarea.selectionStart;
+      const textBeforeCursor = textarea.value.substring(0, cursorPosition - 1);
+      const textAfterCursor = textarea.value.substring(cursorPosition);
+      // удаляем текст до курсора
+      textarea.value = textBeforeCursor + textAfterCursor;
+      // устанавливаем позицию курсора после удаления текста
+      textarea.selectionStart = cursorPosition - 1;
+      textarea.selectionEnd = cursorPosition - 1;
     } else if (code === 'Enter') {
-      textarea.value += '\n';
+      const cursorPosition = textarea.selectionStart;
+      const textBeforeCursor = textarea.value.substring(0, cursorPosition);
+      const textAfterCursor = textarea.value.substring(cursorPosition);
+      // удаляем текст до курсора
+      textarea.value = `${textBeforeCursor}\n${textAfterCursor}`;
+      // устанавливаем позицию курсора после удаления текста
+      textarea.selectionStart = cursorPosition + 1;
+      textarea.selectionEnd = cursorPosition + 1;
     } else if (code === 'Shift') {
-      textarea.value += '';
-      keyboardBlock.innerHTML = '';
-      displayLetters(codeDown, keyUpEng);
+      if (shift === 'false') {
+        shift = 'true';
+        keyboardBlock.innerHTML = '';
+        displayLetters(codeDown, (language === 'ru') ? keyUpRu : keyUpEng);
+      } else {
+        shift = 'false';
+        keyboardBlock.innerHTML = '';
+        displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
+      }
     } else if (code === 'Tab') {
       textarea.value += '    ';
+    } else if (code === '') {
+      textarea.value += ' ';
     } else if (code === 'CapsLock') {
-      textarea.value += '';
-      if (!capsLock) {
-        event.target.classList.add('active');
+      if (capsLock === 'false') {
+        capsLock = 'true';
         keyboardBlock.innerHTML = '';
-        capsLock = true;
-        displayLetters(codeDown, keyCapsEng);
+        displayLetters(codeDown, (language === 'ru') ? keyCapsRu : keyCapsEng);
       } else {
-        event.target.classList.remove('active');
+        capsLock = 'false';
         keyboardBlock.innerHTML = '';
-        capsLock = false;
-        displayLetters(codeDown, keyDownEng);
+        displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
       }
     } else if (code === 'Ctrl' || code === 'Alt' || code === 'Cmd') {
       textarea.value += '';
-    } else {
+    } else if (shift === 'true') {
       textarea.value += code;
+      keyboardBlock.innerHTML = '';
+      shift = 'false';
+      displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
+    } else {
+      const cursorPosition = textarea.selectionStart;
+      const textBeforeCursor = textarea.value.substring(0, cursorPosition);
+      const textAfterCursor = textarea.value.substring(cursorPosition);
+      // удаляем текст до курсора
+      textarea.value = `${textBeforeCursor}${code}${textAfterCursor}`;
+      // устанавливаем позицию курсора после удаления текста
+      textarea.selectionStart = cursorPosition + 1;
+      textarea.selectionEnd = cursorPosition + 1;
     }
-    console.log(textarea.value);
   }
 });
