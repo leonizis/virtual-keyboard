@@ -17,8 +17,8 @@
 .keyboard-block{
     margin: 20px 0 0 0;
     width: 90%;
-    border: 4px solid #000;
-    background-color: #868585;
+    border: 4px solid #3f6eb5;
+    background-color: #aaacab;
 }
 .keyboard-row{
     display: flex;
@@ -29,56 +29,67 @@
     width: 40px;
     height: 40px;
     background-color: #535353;
-    color: #fff;
     margin: 4px;
+    color: #fff;
     line-height: 35px;
-    transition: all 0.3s;
+    background-color: #3f6eb5;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.3),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.2), 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 .key:hover{
     cursor: pointer;
-    background-color: #312f2f;
-    box-shadow: 0px 0px 3px 3px rgba(206, 206, 206, 0.5);
+    box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.3),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.2), 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
 }
-.key:active{
-    
-
-    box-shadow: 0px 0px 5px 5px rgba(206, 206, 206, 0.5);
+.key:active{ 
+    box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.3),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.2), 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
 }
 .active {
-    background-color: #e51010; /* любой цвет, который будет указывать на активную кнопку */
+    box-shadow: 0px 5px 0px 0px rgba(209, 30, 30, 0.3),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.2), 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
   }
   .CapsLock:active {
-    background-color: red;
+    box-shadow: 0px 5px 0px 0px rgba(209, 30, 30, 0.3),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.2), 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
 }
 .hovered{
-    background-color: #312f2f;
-    box-shadow: 0px 0px 5px 5px rgba(206, 206, 206, 0.5);
+    box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.3),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.2), 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
 }
 .CapsLock.hovered{
     background-color: #e51010;
+    box-shadow: 0px 5px 0px 0px rgba(209, 30, 30, 0.3),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.2), 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
 }
-.key.active {
-    background-color: #e51010;
-  }
-
 .Backspace{
     width: 90px;
     height: 40px;
-    background-color: #060505;
+    background-color: #17139d;
     color: #fff;
     margin: 5px;
 }
 .Tab{
     width: 65px;
     height: 40px;
-    background-color: #060505;
+    background-color: #17139d;
     color: #fff;
     margin: 5px;
 }
 .Enter{
     width: 65px;
     height: 90px;
-    background-color: #060505;
+    background-color: #17139d;
     border: none;
     color: #fff;
     border-radius: 0 0 0 100%;
@@ -91,33 +102,35 @@
 .CapsLock{
     width: 78px;
     height: 40px;
-    background-color: #060505;
+    background-color: #17139d;
     border: none;
     color: #fff;
 }
 .ShiftLeft{
     width: 78px;
     height: 40px;
-    background-color: #060505;
+    background-color: #17139d;
     border: none;
     color: #fff;
 }
 .ShiftRight{
     width: 100px;
     height: 40px;
-    background-color: #060505;
+    background-color: #17139d;
     border: none;
     color: #fff;
 }
 .ControlLeft,
 .AltLeft,
 .AltRight{
-    background-color: #060505;
+    background-color: #17139d;
+    color: #fff;
 }
 .MetaLeft,
 .MetaRight{
-    background-color: #060505;
+    background-color: #17139d;
     width: 60px;
+    color: #fff;
 }
 .Space{
     width: 297px;
@@ -127,16 +140,18 @@
     height: 18px;
     margin: 26px 0 0 4px;
     line-height: 20px;
-    
+    color: #fff;
 }
 .ArrowUp{
     height: 18px;
     line-height: 15px;
+    color: #fff;
 }
 .ArrowDown{
     height: 18px;
     margin: 26px 0 0 -44px;
     line-height: 23px;
+    color: #fff;
 }
 
 

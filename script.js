@@ -162,9 +162,8 @@ document.addEventListener('keydown', (event) => {
     const cursorPosition = textarea.selectionStart;
     const textBeforeCursor = textarea.value.substring(0, cursorPosition);
     const textAfterCursor = textarea.value.substring(cursorPosition);
-    // удаляем текст до курсора
     textarea.value = `${textBeforeCursor}${event.key}${textAfterCursor}`;
-    // устанавливаем позицию курсора после удаления текста
+    // устанавливаем позицию курсора
     textarea.selectionStart = cursorPosition + 1;
     textarea.selectionEnd = cursorPosition + 1;
   }
@@ -253,3 +252,8 @@ document.addEventListener('click', (event) => {
     }
   }
 });
+
+const footer = document.createElement('p');
+footer.setAttribute('class', 'footer');
+footer.innerHTML = 'Клавиатура создана в операционной системе macOS. Для переключения языка комбинация: левые ctrl + alt';
+container.appendChild(footer);
