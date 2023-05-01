@@ -39,27 +39,25 @@ const keyCapsRu = ['>', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '
   'Ctrl', 'Alt', 'Cmd', '', 'Cmd', 'Alt', '◄', '▲', '▼', '►'];
 
 const container = document.createElement('div');
-container.setAttribute('class', 'container');
+container.className = 'container';
 document.body.appendChild(container);
 
 let capsLock = 'false';
 let shift = 'false';
 // получаем язык из localStorage если не находим, то  присваеваем русский
-let language = localStorage.getItem('language');
-if (!language) {
-  language = 'ru';
-}
+let language = localStorage.getItem('language') || 'ru';
+
 const title = document.createElement('p');
-title.setAttribute('class', 'title');
+title.className = 'title';
 title.innerHTML = 'Виртуальная клавиатура';
 container.appendChild(title);
 
 // создаем форму для ввода текста
 
 const textarea = document.createElement('textarea');
-textarea.setAttribute('class', 'textarea');
-textarea.setAttribute('cols', '50'); // ширина в символах
-textarea.setAttribute('rows', '5'); // высота в строках
+textarea.className = 'textarea';
+textarea.cols = '50'; // ширина в символах
+textarea.rows = '20'; // высота в строках
 container.appendChild(textarea);
 
 // создаем клавиатуру
@@ -71,7 +69,7 @@ const keyboardKeys = [];
 let keyboardRow = '';
 const rowSizes = [14, 14, 13, 13, 10]; // колличество кнопок в каждом ряду
 
-function displayLetters(codes, keyses) {
+const displayLetters = (codes, keyses) => {
   localStorage.setItem('language', language); // сохраняем переременную language в localStorage
   for (let i = 0; i < 5; i += 1) {
     keyboardRow = document.createElement('div');
@@ -90,7 +88,7 @@ function displayLetters(codes, keyses) {
   }
   document.addEventListener('keydown', (event) => {
     const key = document.querySelector(`.${event.code}`);
-    key.classList.add('hovered');
+    key.className = 'hovered';
   });
   if (capsLock === 'true') {
     const capsStyle = document.querySelector('.CapsLock');
@@ -102,7 +100,7 @@ function displayLetters(codes, keyses) {
     shiftLeft.style.backgroundColor = 'red';
     shiftRight.style.backgroundColor = 'red';
   }
-}
+};
 displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
 
 // устанавливаем фокус на окно ввода а так же подсвечиваем нажатие клавиш через hovered
@@ -113,7 +111,7 @@ document.addEventListener('keydown', (event) => {
   const { code } = event;
 
   const key = document.querySelector(`.${event.code}`);
-  key.classList.add('hovered');
+  key.className = 'hovered';
   if (code === 'Backspace') {
     const cursorPosition = textarea.selectionStart;
     const textBeforeCursor = textarea.value.substring(0, cursorPosition - 1);
@@ -183,7 +181,7 @@ document.addEventListener('keyup', (event) => {
   const key = document.querySelector(`.${event.code}`);
   if (key.textContent === 'Shift') {
     shift = 'false';
-    key.classList.remove('hovered');
+    key.className = 'hovered';
     keyboardBlock.innerHTML = '';
     if (capsLock === 'true') {
       displayLetters(codeDown, (language === 'ru') ? keyCapsRu : keyCapsEng);
@@ -281,6 +279,6 @@ document.addEventListener('click', (event) => {
 });
 
 const footer = document.createElement('p');
-footer.setAttribute('class', 'footer');
+footer.className = 'footer';
 footer.innerHTML = 'Клавиатура создана в операционной системе macOS. Для переключения языка комбинация: левые ctrl + alt';
 container.appendChild(footer);
