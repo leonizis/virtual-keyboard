@@ -45,8 +45,10 @@ document.body.appendChild(container);
 let capsLock = 'false';
 let shift = 'false';
 // получаем язык из localStorage если не находим, то  присваеваем русский
-let language = localStorage.getItem('language') || 'ru';
-
+let language = localStorage.getItem('language');
+if (!language) {
+  language = 'ru';
+}
 const title = document.createElement('p');
 title.className = 'title';
 title.innerHTML = 'Виртуальная клавиатура';
@@ -57,7 +59,7 @@ container.appendChild(title);
 const textarea = document.createElement('textarea');
 textarea.className = 'textarea';
 textarea.cols = '50'; // ширина в символах
-textarea.rows = '20'; // высота в строках
+textarea.rows = '15'; // высота в строках
 container.appendChild(textarea);
 
 // создаем клавиатуру
@@ -69,7 +71,7 @@ const keyboardKeys = [];
 let keyboardRow = '';
 const rowSizes = [14, 14, 13, 13, 10]; // колличество кнопок в каждом ряду
 
-const displayLetters = (codes, keyses) => {
+function displayLetters(codes, keyses) {
   localStorage.setItem('language', language); // сохраняем переременную language в localStorage
   for (let i = 0; i < 5; i += 1) {
     keyboardRow = document.createElement('div');
@@ -88,7 +90,7 @@ const displayLetters = (codes, keyses) => {
   }
   document.addEventListener('keydown', (event) => {
     const key = document.querySelector(`.${event.code}`);
-    key.className = 'hovered';
+    key.classList.add('hovered');
   });
   if (capsLock === 'true') {
     const capsStyle = document.querySelector('.CapsLock');
@@ -100,7 +102,7 @@ const displayLetters = (codes, keyses) => {
     shiftLeft.style.backgroundColor = 'red';
     shiftRight.style.backgroundColor = 'red';
   }
-};
+}
 displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
 
 // устанавливаем фокус на окно ввода а так же подсвечиваем нажатие клавиш через hovered
@@ -111,7 +113,7 @@ document.addEventListener('keydown', (event) => {
   const { code } = event;
 
   const key = document.querySelector(`.${event.code}`);
-  key.className = 'hovered';
+  key.classList.add('hovered');
   if (code === 'Backspace') {
     const cursorPosition = textarea.selectionStart;
     const textBeforeCursor = textarea.value.substring(0, cursorPosition - 1);
@@ -181,7 +183,7 @@ document.addEventListener('keyup', (event) => {
   const key = document.querySelector(`.${event.code}`);
   if (key.textContent === 'Shift') {
     shift = 'false';
-    key.className = 'hovered';
+    key.classList.remove('hovered');
     keyboardBlock.innerHTML = '';
     if (capsLock === 'true') {
       displayLetters(codeDown, (language === 'ru') ? keyCapsRu : keyCapsEng);
