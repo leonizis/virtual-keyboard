@@ -66,12 +66,12 @@
     0px 4px 4px 0px rgba(0, 0, 0, 0.2), 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
 }
-.CapsLock.hovered{
+/* .CapsLock.hovered{
     background-color: #e51010;
     box-shadow: 0px 5px 0px 0px rgba(209, 30, 30, 0.3),
     0px 4px 4px 0px rgba(0, 0, 0, 0.2), 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
     transform: translateY(1px);
-}
+} */
 .Backspace{
     width: 90px;
     height: 40px;

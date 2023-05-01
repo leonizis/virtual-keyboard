@@ -146,16 +146,25 @@ document.addEventListener('keydown', (event) => {
   } else if (code === 'ArrowRight') {
     textarea.value += '►';
   } else if (key.textContent === 'Shift') {
+    shift = shift === 'true' ? 'false' : 'true';
     textarea.value += '';
     keyboardBlock.innerHTML = '';
-    displayLetters(codeDown, (language === 'ru') ? keyUpRu : keyUpEng);
+    if (capsLock === 'true') {
+      displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
+    } else {
+      displayLetters(codeDown, (language === 'ru') ? keyUpRu : keyUpEng);
+    }
   } else if (key.textContent === 'Tab') {
     textarea.value += '    ';
   } else if (key.textContent === 'CapsLock') {
+    capsLock = capsLock === 'false' ? 'true' : 'false';
     textarea.value += '';
     keyboardBlock.innerHTML = '';
-    displayLetters(codeDown, (language === 'ru') ? keyCapsRu : keyCapsEng);
-    key.classList.add('hovered');
+    if (capsLock === 'true') {
+      displayLetters(codeDown, (language === 'ru') ? keyCapsRu : keyCapsEng);
+    } else {
+      displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
+    }
   } else if (key.textContent === 'Ctrl' || key.textContent === 'Cmd' || key.textContent === 'Alt') {
     textarea.value += '';
   } else {
@@ -173,13 +182,23 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('keyup', (event) => {
   const key = document.querySelector(`.${event.code}`);
   if (key.textContent === 'Shift') {
+    shift = 'false';
     key.classList.remove('hovered');
     keyboardBlock.innerHTML = '';
-    displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
+    if (capsLock === 'true') {
+      displayLetters(codeDown, (language === 'ru') ? keyCapsRu : keyCapsEng);
+    } else {
+      displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
+    }
   }
   if (key.textContent === 'CapsLock') {
+    capsLock = capsLock === 'false' ? 'true' : 'false';
     keyboardBlock.innerHTML = '';
-    displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
+    if (capsLock === 'true') {
+      displayLetters(codeDown, (language === 'ru') ? keyCapsRu : keyCapsEng);
+    } else {
+      displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
+    }
     key.classList.remove('hovered');
   }
   key.classList.remove('hovered');
@@ -213,11 +232,19 @@ document.addEventListener('click', (event) => {
       if (shift === 'false') {
         shift = 'true';
         keyboardBlock.innerHTML = '';
-        displayLetters(codeDown, (language === 'ru') ? keyUpRu : keyUpEng);
+        if (capsLock === 'true') {
+          displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
+        } else {
+          displayLetters(codeDown, (language === 'ru') ? keyUpRu : keyUpEng);
+        }
       } else {
         shift = 'false';
         keyboardBlock.innerHTML = '';
-        displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
+        if (capsLock === 'true') {
+          displayLetters(codeDown, (language === 'ru') ? keyUpRu : keyUpEng);
+        } else {
+          displayLetters(codeDown, (language === 'ru') ? keyDownRu : keyDownEng);
+        }
       }
     } else if (code === 'Tab') {
       textarea.value += '    ';
